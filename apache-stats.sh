@@ -20,12 +20,11 @@
 
 CACHETIME=30
 CACHEFILE=/var/local/snmp/cache/apache
-CACHEFILE=/tmp/t1
 
 # check for cache file newer CACHETIME seconds ago
 if [ ! -f $CACHEFILE -o $((`date +%s`-`stat --format=%Y $CACHEFILE`)) -ge $CACHETIME ]; then
 	# update the data
-	wget --output-document=$CACHEFILE.TMP.$$ 'http://localhost/server-status?auto' >/dev/null 2>&1
+	wget --output-document=$CACHEFILE.TMP.$$ --user-agent='SNMP Apache Stats' 'http://localhost/server-status?auto' >/dev/null 2>&1
 	mv $CACHEFILE.TMP.$$ $CACHEFILE
 fi
 
@@ -50,17 +49,17 @@ done
 
 # count up the scorecard
 scorecard=`grep ^Scoreboard: $CACHEFILE | sed 's/^Scoreboard: *//'`
-echo $scorecard | sed 's/[^_]//g' | wc -c
-echo $scorecard | sed 's/[^S]//g' | wc -c
-echo $scorecard | sed 's/[^R]//g' | wc -c
-echo $scorecard | sed 's/[^W]//g' | wc -c
-echo $scorecard | sed 's/[^K]//g' | wc -c
-echo $scorecard | sed 's/[^D]//g' | wc -c
-echo $scorecard | sed 's/[^C]//g' | wc -c
-echo $scorecard | sed 's/[^L]//g' | wc -c
-echo $scorecard | sed 's/[^G]//g' | wc -c
-echo $scorecard | sed 's/[^I]//g' | wc -c
-echo $scorecard | sed 's/[^\.]//g' | wc -c
+echo -n $scorecard | sed 's/[^_]//g' | wc -c
+echo -n $scorecard | sed 's/[^S]//g' | wc -c
+echo -n $scorecard | sed 's/[^R]//g' | wc -c
+echo -n $scorecard | sed 's/[^W]//g' | wc -c
+echo -n $scorecard | sed 's/[^K]//g' | wc -c
+echo -n $scorecard | sed 's/[^D]//g' | wc -c
+echo -n $scorecard | sed 's/[^C]//g' | wc -c
+echo -n $scorecard | sed 's/[^L]//g' | wc -c
+echo -n $scorecard | sed 's/[^G]//g' | wc -c
+echo -n $scorecard | sed 's/[^I]//g' | wc -c
+echo -n $scorecard | sed 's/[^\.]//g' | wc -c
 
 
 
