@@ -22,7 +22,10 @@ CACHETIME=30
 CACHEFILE=/var/local/snmp/cache/apache
 
 # check for cache file newer CACHETIME seconds ago
-if [ ! -f $CACHEFILE -o $((`date +%s`-`stat --format=%Y $CACHEFILE`)) -ge $CACHETIME ]; then
+if [ ! -f $CACHEFILE ]; then
+	touch -d yesterday $CACHEFILE
+fi
+if [ $((`date +%s`-`stat --format=%Y $CACHEFILE`)) -ge $CACHETIME ]; then
 	# update the data
 	wget --output-document=$CACHEFILE.TMP.$$ --user-agent='SNMP Apache Stats' 'http://localhost/server-status?auto' >/dev/null 2>&1
 	mv $CACHEFILE.TMP.$$ $CACHEFILE
