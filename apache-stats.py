@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 #
-# See: http://www.pitt-pladdy.com/blog/_20091114-134615_0000_Apache_stats_on_Cacti_via_SNMP_/
+# See: https://www.pitt-pladdy.com/blog/_20091114-134615_0000_Apache_stats_on_Cacti_via_SNMP_/
 
 CACHETIME = 30
 CACHEFILE = '/var/local/snmp/cache/apache'
