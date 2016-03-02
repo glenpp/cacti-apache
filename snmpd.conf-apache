@@ -1,0 +1,1 @@
+extend apache /etc/snmp/apache-stats.py
