@@ -1,1 +1,1 @@
-extend apache /etc/snmp/apache-stats.py
+extend apache /etc/snmp/apache_stats.py
